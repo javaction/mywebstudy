@@ -12,11 +12,27 @@ and open the template in the editor.
     <body>
         <div>跳跳糖</div>
         
-        <div>
+        <div id ="d1">
             <button type="submit" id="btn">我是submit跳转</button><br /><br />
             <button type="button" onclick="click1()">我是button跳转</button><br /><br />
             <input type="button" value="点击后，跳转到列表加载的页面.."  /><br/><br />
-            <button type="button" onclick="findArrys()">点击，看js数组</button>
+            <button type="button" onclick="findArrys()">点击，看js数组</button><br/><br />
+            <button type="button" id="btn1">点击，看ajax获取列表数据</button>
+        </div>
+        <hr />
+        <div id="d2">
+            <form action="" method="post" >
+                <ul>    
+                    <li>用于测试，back()和go()返回时候，数据还在不在？ </li>
+                    <li>
+                        测试数据1：<input type="text" name="username" id="username" placeholder="请输入" />
+                    </li>
+                    <li>
+                        测试数据2：<input type="text" name="password" id="password" placeholder="请输入" />                      
+                    </li>
+                    <!--<li><button type="submit">登陆</button></li>-->
+                </ul>
+            </form>
             
         </div>
         
@@ -48,9 +64,17 @@ and open the template in the editor.
                     alert(objs[x].name);
                 }
                 
-                
             }
             
+            //跳转到列表数据页面
+            $("#btn1").click(function(){
+                    location.href = getRootPath().projectName+"/suhtml/tabledata1.html";
+            });
+            
+            
+            
         </script>
+        <script type="text/javascript" src="js/suJs/subase.js" ></script>
+        
     </body>
 </html>
