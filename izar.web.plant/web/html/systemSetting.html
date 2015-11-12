@@ -1,0 +1,95 @@
+<!--
+    系统设置
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="systemSettingLabel">系统设置</h4>
+                </div>
+                <form class="form-horizontal" id="systemForm" method="post">
+                    <div class="modal-body">
+                        <fieldset class="scheduler-border">
+                            <legend>数据库备份设置</legend>
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-1">
+                                    <label class="checkbox"><input type="checkbox" id="backUpSet" checked/><cite  id="backUpSetLb"> 备份已开启</cite></label> 
+                                </div>
+                                <label class="col-sm-2 control-label" for="backupPath">备份路径</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" id="backupPath" name="backupPath" type="text" placeholder="C:\backup"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="timeInterval">备份时间间隔</label>
+                                <div class="col-sm-3">
+                                    <select class="form-control" id="everyInterval">
+                                        <option value="yearly">每年</option>
+                                        <option value="monthly">每月</option>
+                                        <option value="weekly">每周</option>
+                                    </select>
+                                </div>
+                                <div class="" id="month"></div>
+                                <div class="col-sm-5" id="intervalOut">
+                                    <input type="text" class="form-control" name="interval" id="interval" data-bv-notempty />
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="submit" class="btn btn-primary" onclick="javascript:editConfig()">确定</button>
+                    </div>
+                </form>
+            </div>
+            <script>
+                $("#everyInterval").change(function(){
+                    $("#month").removeClass("col-sm-3");
+                    $("#month").empty();
+                    $("#intervalOut").removeClass("col-sm-2").addClass("col-sm-5");
+                    $("#interval").val("");
+                    $("#intervalOut").html('<input type="text" class="form-control"  name="interval" id="interval">');//绑定日期选择事件之后无法重现设置日期格式
+                    var dateFmt = {dateFmt:'MM月 dd日 HH时'};
+                    if($("#everyInterval").val() == "yearly"){
+                        dateFmt = {dateFmt:'MM月 dd日 HH时'};
+                    }else if($("#everyInterval").val() == "monthly"){
+                        dateFmt = {dateFmt:'dd日 HH时'};
+                    }else{
+                        $("#month").addClass("col-sm-3");
+                        $("#intervalOut").removeClass("col-sm-5").addClass("col-sm-2");
+                        $("#month").html('<select class="form-control" id="weekEvery"><option value="01">星期一</option><option value="02">星期二</option><option value="03">星期三</option><option value="04">星期四</option><option value="05">星期五</option><option value="06">星期六</option><option value="07">星期日</option></select>');
+                        $("#intervalOut").html('<input type="text" class="form-control" name="interval" id="interval">');
+                        dateFmt = {dateFmt:'HH时' };
+                    }
+                    $("#interval").bind("click",function(){
+                        WdatePicker(dateFmt);
+                    });
+                });
+                //是否开启盘符
+                $("#backUpSet").click(function(){
+                    if($("#backUpSet").attr("checked")=="checked"){
+                        $("#backupPath").attr("disabled", false);
+                        $("#everyInterval").attr("disabled", false);
+                        $("#interval").attr("disabled", false);
+                        $("#backUpSetLb").text("备份已开启");
+                    }else{
+                        $("#backupPath").attr("disabled", true);
+                        $("#everyInterval").attr("disabled", true);
+                        $("#interval").attr("disabled", true);
+                        $("#backUpSetLb").text("备份已关闭");
+                    }
+                    setBackUp();});
+                                    
+                alertValidate("system");//验证信息
+                findAllConfigs();//查询所有统计信息
+            </script>
+        </div>
+    </body>
+</html>

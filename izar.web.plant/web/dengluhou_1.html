@@ -1,0 +1,56 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>登陆后....</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script type="text/javascript" src="js/plug/jquery-min.js"></script>
+    </head>
+    <body>
+        <div>跳跳糖</div>
+        
+        <div>
+            <button type="submit" id="btn">我是submit跳转</button><br /><br />
+            <button type="button" onclick="click1()">我是button跳转</button><br /><br />
+            <input type="button" value="点击后，跳转到列表加载的页面.."  /><br/><br />
+            <button type="button" onclick="findArrys()">点击，看js数组</button>
+            
+        </div>
+        
+        <script type="text/javascript">
+            
+            $("#btn").click(function(){    
+                //使用jquery点击事件
+                location.href = "/mystudy/dengluhou.html";
+            }); 
+            
+            
+            function click1(){
+                //使用js点击事件，注意：click()不可以（应该是关键字的问题？）
+                window.location.href = "/mystudy/dengluhou.html";
+            }
+            
+            function findArrys(){
+                var objs = [{id:1,name:"xiaoming"},{id:2,name:"xiaohong"}];
+               // alert(objs[0].name);
+               
+               //循环1
+//                for(var i =0; i<objs.length;i++){
+//                    alert(objs[i].name);
+//                }
+                
+                //循环2
+                var x;
+                for(x in objs){
+                    alert(objs[x].name);
+                }
+                
+                
+            }
+            
+        </script>
+    </body>
+</html>

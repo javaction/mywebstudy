@@ -1,0 +1,12 @@
+/* 
+    Document   : validation
+    Created on : 2015-10-28, 16:54:09
+    Author     : Administrator
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+input.error { border: 1px solid red; }

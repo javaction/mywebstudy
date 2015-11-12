@@ -1,0 +1,57 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="historyLabel">增加</h4>
+                </div>
+                <form class="form-horizontal" name="concentratorForm" id="concentratorForm" method="post" action=""  role="form">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="collectorNumber" >采集器号：</label>
+                            <div class="col-sm-9">
+                                <input id="collectorNumber" name="collectorNumber" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="model" >型号：</label>
+                            <div class="col-sm-9">
+                                <input id="inputPassword" name="model" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="manufacturers" >厂商：</label>
+                            <div class="col-sm-9">
+                                <input id="manufacturers" name="manufacturers" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="remark" >备注：</label>
+                            <div class="col-sm-9">
+                                <input id="inputPassword" name="remark" type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="submit" class="btn btn-primary">确定</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script>
+     
+            alertValidate("concentrator");
+        </script>
+    </body>
+</html>

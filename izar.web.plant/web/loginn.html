@@ -1,0 +1,108 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>我要登陆.</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script type="text/javascript" src="js/plug/jquery-min.js"></script>
+        <style type="text/css">
+            ul{list-style: none; }
+            
+        </style>
+    </head>
+    <body>
+        <div>
+            <br style="color: skyblue"/>
+            <!-- 测试用户登录 begin -->
+            <div id="loginn">
+                <form id="loginFormm" name="loginFormm" method="post">
+                    <ul>
+                        <li>...我要登陆...</li>
+                        <li>
+                            用户名：<input type="text" name="username" id="username" placeholder="请输入用户名" />
+                            <span id="uconfirm"></span>
+                        </li>
+                        <li>
+                            密&nbsp;&nbsp; 码：<input type="text" name="password" id="password" placeholder="请输入密码" />
+                            <span id="pconfirm"></span>
+                        </li>
+                        <li><button type="submit">登陆</button></li>
+                    </ul>
+                </form>
+
+            </div>
+            <!-- 测试用户登录 end -->
+        </div>
+        
+        <script type="text/javascript">
+            $("#loginFormm").submit(function(){
+                loginn();
+                return false;
+            });
+            
+            function loginn(){
+                var username = $("#username").val();
+                var password = $("#password").val();
+                //判断用户名不为空
+                if(username == ""){
+                    $("#uconfirm").text("用户名不能为空！");
+                    $("#username").focus();
+                    return false;
+                }
+                if(password == ""){
+                    $("#pconfirm").text("密码不能为空！");
+                    $("#password").focus();
+                    return false;
+                }
+                
+                $.ajax({
+                    type:'post',
+                    url:'/mystudy/webresources/hysuser/login',
+                    contentType:'application/json; charset=utf-8',
+                    data: JSON.stringify({
+                        hysUserName:username,
+                        hysUserPassword:password
+                    }),
+                    datatype:'json',
+                    beforeSend :function(){},
+                    success:function(msg11){
+                        console.log(msg11);
+                        if(msg11.login == "successful"){
+                            $("#uconfirm").text("登陆成功！");
+//                             location.href = "/mystudy/login.html";
+//                             location.href = "/mystudy/dengluhou.html"; //这个用于自测
+                        //     location.href = "/mystudy/suhtml/dengluhou.html";
+//                             location.href = "/mystudy/html/login.html";
+//                             window.location.href = getRootPath().projectName+'/suHtml/dengluhou.html?username='+$("#loginFormm input[name=username]").val();
+  
+                                //console.log("----我的路径---:"+getRootPath().projectName);
+//                                location.href = getRootPath().projectName+"/suhtml/login.html";//在suhtml文件夹下的html无法访问，提示404
+                              //  location.href = getRootPath().projectName+"/html/baseInfo.html";
+                              location.href = getRootPath().projectName+"/dengluhou.html"; 
+
+                             
+                              
+                        }else{  
+                            $("#uconfirm").text("登陆失败！");
+                        }
+                    },
+                    error :function(){
+                        alert("错误，请与管理员联系");
+                    }
+                });
+            }
+            
+            
+        </script>
+        
+        <!--引入外部的js操作-->
+        <!--<script type="text/javascript" src="js/suJs/suValidate.js"></script>-->
+        
+        <!--<script type="text/javascript" src="./js/myJs/base.js"></script>-->
+        <script type="text/javascript" src="js/suJs/subase.js" ></script>
+        
+    </body>
+</html>

@@ -1,0 +1,77 @@
+<!--
+添加设备
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">增加</h4>
+                </div>
+                <form name="regionalForm" id="equipmentForm" method="post" action="" class="form-horizontal" role="form">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="deviceNumber" class="col-sm-3 control-label">设备号：</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="deviceNumber" name="deviceNumber">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="deviceModel" class="col-sm-3 control-label">设备型号：</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="deviceModel" name="deviceModel">
+                            </div>
+                        </div>
+
+                        <div class="form-group"> 
+                            <label for="measurementType" class=" col-sm-3  control-label">计量类型：</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="measurementType">
+                                    <option value="">--请选择--</option>
+                                    <option value="electric">电表</option>
+                                    <option value="heat">热表</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group"> 
+                            <label for="standardPower" class="col-sm-3  control-label">标准功率：</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="standardPower" name="standardPower" placeholder="kW/h">
+                            </div>
+                        </div>
+                        <div class="form-group"> 
+                            <label for="manufacturers" class="col-sm-3  control-label">厂商：</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control"  name="manufacturers">
+                            </div>
+                        </div>
+                        <div class="form-group"> 
+                            <label for="concentratorId" class="col-sm-3 control-label">采集器号：</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="concentratorId">
+                                    <option value="">--请选择--</option>
+                                    <option value="">001</option>
+                                    <option value="">002</option>
+                                    <option value="">003</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="submit" class="btn btn-primary">确定</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script>
+            alertValidate("equipment")//增加验证信息
+        </script>
+    </body>
+</html>

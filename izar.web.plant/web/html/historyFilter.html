@@ -1,0 +1,84 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <div class="modal-dialog" style="width:700px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="historyLabel">历史抄表</h4>
+                </div>
+                <form class="form-horizontal" name="historyFlterForm" id="historyFlterForm" method="post" action=""  role="form">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="beginTime">开始时间：</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" id="beginTime" name="beginTime" type="text" />
+                            </div>
+                            <label class="col-sm-2 control-label" for="endTime">结束时间：</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" id="endTime" name="endTime" type="text"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="hysMeterNumber">设备号：</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" name="hysMeterNumber">
+                                    <option value="">--请选择--</option>
+                                    <option value="male">001</option>
+                                    <option value="female">002</option>
+                                    <option value="other">003</option>
+                                </select>
+                            </div>
+                            <label class="col-sm-2 control-label" for="areaName">区域名称：</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" id="areaName" name="areaName" type="text" onclick="showMenu({id:'areaName',level:'1'})"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="beltlineName">生产线：</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" id="beltlineName" name ="beltlineName" type="text" onclick="showMenu({id:'beltlineName',level:'2'})" />
+                            </div>
+                            <label class="col-sm-2 control-label" for="productionGroup">生产组：</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" id="productionGroup" name="productionGroup" type="text" onclick="showMenu({id:'productionGroup',level:'3'})"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="submit" class="btn btn-primary">确定</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="menuContent" class="menuContent" style="display:none; position: absolute;z-index:1050;background-color: #F5F5F5;">
+            <ul id="treeDemo" class="ztree" style="margin-top:0;height: 300px;"></ul>
+        </div>
+        <script>
+            $("#beginTime").click(function(){
+                WdatePicker({
+                    dateFmt:'yyyy-MM-dd HH:mm:ss',
+                    //                    lang:'zh-cn', 
+                    maxDate:'#F{$dp.$D(\'endTime\')}'
+                })
+            });
+            $("#endTime").click(function(){
+                WdatePicker({
+                    dateFmt:'yyyy-MM-dd HH:mm:ss',
+                    minDate:'#F{$dp.$D(\'beginTime\')}',
+                    maxDate:'%y-%M-%d %H:%m:%s'
+                })
+            });
+            alertValidate("history");
+        </script>
+    </body>
+</html>

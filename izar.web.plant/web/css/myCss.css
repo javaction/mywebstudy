@@ -1,0 +1,133 @@
+/* 
+    Document   : myCss
+    Created on : 2015-5-26, 15:25:11
+    Author     : malinda.Wang
+    Description:
+        Purpose of the stylesheet follows.
+*/
+@charset "utf-8";
+root { 
+    display: block;
+}
+
+html,
+body {
+    height: 100%;
+    padding-bottom:0px; 
+    min-width:980px; 
+    width:100%;
+    min-width: 768px;
+    _width:expression((document.documentElement.clientWidth||document.body.clientWidth)<1350?"1350px":""); 
+    overflow:hidden;
+    /* The html and body elements cannot have any padding or margin. */
+}
+.ui-helper-hidden{display:none}
+.head{
+    /*background: url(../images/content/bg_top.png) no-repeat  ;*/
+    width:100%;
+    height:158px;
+    min-height: 158px;
+    min-width: 1130px;
+}
+#pic{
+    height: 100%;
+    width: 100%;
+    margin:0; 
+    padding:0;
+    z-index: -1;
+    right: 0;
+    bottom: 0;
+    position:relative;
+    top: 0; 
+}
+.headIcon{
+    list-style-type: none;
+    zoom: 1;
+    position:absolute;
+    top:100px;
+    right:4em;
+}
+.headIcon li{
+    display: inline-block;
+}
+.headIcon li{
+    *display: inline; 
+    *zoom: 1;
+}
+.headIcon li>img{
+    cursor: pointer;
+}
+.myfooter{
+    background:url(../images/content/bg_footer.png)  no-repeat left bottom; 
+    background-position-y:bottom; 
+}
+#treeSpan{
+    overflow-y: scroll;
+}
+/*重写部分样式*/
+.navbar{
+    margin-bottom: 0px;
+}
+/*.navbar-inner {
+    background-image: -moz-linear-gradient(top, #cfe3f1, #f2f2f2);
+    background-image: -ms-linear-gradient(top, #cfe3f1, #f2f2f2);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#cfe3f1), to(#f2f2f2));
+    background-image: -webkit-linear-gradient(top, #cfe3f1, #f2f2f2);
+    background-image: -o-linear-gradient(top, #cfe3f1, #f2f2f2);
+    background-image: linear-gradient(top, #cfe3f1, #f2f2f2);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#'cfe3f1, endColorstr='#'f2f2f2, GradientType=0);-- ie--
+    background-image: url(../images/content/menubg.jpg);
+}*/
+/*
+.navbar-nav > li > a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.navbar-brand {
+    height: 40px;
+    padding-top: 10px;
+    min-width: 768px;
+}
+.navbar {
+    min-height: 40px;
+    min-width: 768px;
+}
+
+.navbar-toggle {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+.navbar .nav .active > a, .navbar .nav .active > a:hover {
+    background-color: #E1EBF1;
+}
+.dropdown-menu{
+    background-color: #E1EBF1;
+}
+.dropdown-menu .divider {
+    height: 1px;
+    margin: 9px 0;
+    overflow: hidden;
+    background-color: #A0A0A0;
+}
+*/
+.ui-helper-hidden{
+    display: none;
+}
+
+fieldset.scheduler-border {
+    border: 1px groove #ddd !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+    -webkit-box-shadow:  0px 0px 0px 0px #000;
+    box-shadow:  0px 0px 0px 0px #000;
+}
+
+legend.scheduler-border {
+    font-size: 1.2em !important;
+    font-weight: bold !important;
+    text-align: left !important;
+    width:inherit; /* Or auto */
+    padding:0 10px; /* To give a bit of padding on the left and right */
+    border-bottom:none;
+
+}

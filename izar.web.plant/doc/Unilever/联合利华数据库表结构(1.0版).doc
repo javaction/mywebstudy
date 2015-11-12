@@ -1,0 +1,623 @@
+现在对联合利华数据库初步设计的表结构，此处为oracle数据库的建表语句，也可以使用PD生成postgreSQl的建表语句。
+
+-----------------------------------------oracle建表语句---------------------------------
+--- sequence 
+
+--drop sequence hys_seq_storage_id;  --删除
+
+create sequence hys_seq_storage_id
+increment by 1
+start with 1
+ nomaxvalue
+ minvalue 1
+ nocache;
+
+
+
+1.用户表
+
+/*==============================================================*/
+/* Table: hys_user                                              */
+/*==============================================================*/
+create table hys_user 
+(
+   hys_storage_id       number(20)           not null,
+   hys_name             varchar2(128)        not null,
+   hys_password         varchar2(128)        not null,
+   hys_group_id         number(20),
+   hys_desc             varchar2(128),
+   constraint PK_HYS_USER primary key (hys_storage_id)
+)
+/
+
+comment on table hys_user is
+'用户表'
+/
+
+comment on column hys_user.hys_storage_id is
+'用户表主键id'
+/
+
+comment on column hys_user.hys_password is
+'用户密码'
+/
+
+comment on column hys_user.hys_group_id is
+'用户所属的角色id'
+/
+
+comment on column hys_user.hys_desc is
+'用户描述'
+/
+
+
+create trigger tib_hys_customer before insert
+on hys_user for each row
+declare
+    integrity_error  exception;
+    errno            integer;
+    errmsg           char(200);
+    dummy            integer;
+    found            boolean;
+
+begin
+    --  Column "hys_storage_id" uses sequence hys_seq_storage_id
+    select hys_seq_storage_id.NEXTVAL INTO :new.hys_storage_id from dual;
+
+--  Errors handling
+exception
+    when integrity_error then
+       raise_application_error(errno, errmsg);
+end;
+/
+
+
+2.角色表
+
+/*==============================================================*/
+/* Table: hys_group                                             */
+/*==============================================================*/
+create table hys_group 
+(
+   hys_storage_id       number(20)           not null,
+   hys_name             varchar2(128),
+   hys_desc             varchar2(128),
+   constraint PK_HYS_GROUP primary key (hys_storage_id)
+)
+/
+
+comment on table hys_group is
+'角色表'
+/
+
+comment on column hys_group.hys_storage_id is
+'角色表主键id'
+/
+
+comment on column hys_group.hys_name is
+'角色名称'
+/
+
+comment on column hys_group.hys_desc is
+'角色描述'
+/
+
+
+
+create trigger tib_hys_user_group before insert
+on hys_group for each row
+declare
+    integrity_error  exception;
+    errno            integer;
+    errmsg           char(200);
+    dummy            integer;
+    found            boolean;
+
+begin
+    --  Column "hys_storage_id" uses sequence hys_seq_storage_id
+    select hys_seq_storage_id.NEXTVAL INTO :new.hys_storage_id from dual;
+
+--  Errors handling
+exception
+    when integrity_error then
+       raise_application_error(errno, errmsg);
+end;
+/
+
+
+
+3.角色权限关联表
+
+/*==============================================================*/
+/* Table: hys_group_rights                                      */
+/*==============================================================*/
+create table hys_group_rights 
+(
+   hys_group_id         number(20)           not null,
+   hys_right_id         number(20)           not null
+);
+
+comment on table hys_group_rights is
+'角色权限关联表';
+
+comment on column hys_group_rights.hys_group_id is
+'角色id';
+
+comment on column hys_group_rights.hys_right_id is
+'权限id';
+
+/*==============================================================*/
+/* Index: hys_group_id                                          */
+/*==============================================================*/
+create unique index hys_group_id on hys_group_rights (
+   
+);
+
+/*==============================================================*/
+/* Index: hys_right_id                                          */
+/*==============================================================*/
+create unique index hys_right_id on hys_group_rights (
+   
+);
+
+
+4.权限表
+
+/*==============================================================*/
+/* Table: hys_rights                                            */
+/*==============================================================*/
+create table hys_rights 
+(
+   hys_storage_id       number(20)           not null,
+   hys_right_name       varchar2(128)        not null,
+   hys_right_code       varchar2(128)        not null,
+   hys_roght_pid        number(20)           not null,
+   constraint PK_HYS_RIGHTS primary key (hys_storage_id)
+)
+/
+
+comment on table hys_rights is
+'权限表'
+/
+
+comment on column hys_rights.hys_storage_id is
+'权限表主键id'
+/
+
+comment on column hys_rights.hys_right_name is
+'权限名称'
+/
+
+comment on column hys_rights.hys_right_code is
+'权限码'
+/
+
+comment on column hys_rights.hys_roght_pid is
+'权限对应父节点id，指明归属哪一个模块'
+/
+
+
+create trigger tib_hys_rights before insert
+on hys_rights for each row
+declare
+    integrity_error  exception;
+    errno            integer;
+    errmsg           char(200);
+    dummy            integer;
+    found            boolean;
+
+begin
+    --  Column "hys_storage_id" uses sequence hys_seq_storage_id
+    select hys_seq_storage_id.NEXTVAL INTO :new.hys_storage_id from dual;
+
+--  Errors handling
+exception
+    when integrity_error then
+       raise_application_error(errno, errmsg);
+end;
+/
+
+
+5.用户数据集关联表
+
+
+/*==============================================================*/
+/* Table: hys_users_data                                        */
+/*==============================================================*/
+create table hys_users_data 
+(
+   hys_users_id         number(20),
+   hys_datas_id         number(20)
+);
+
+comment on table hys_users_data is
+'用户数据集关联表';
+
+comment on column hys_users_data.hys_users_id is
+'用户id';
+
+comment on column hys_users_data.hys_datas_id is
+'数据集id';
+
+/*==============================================================*/
+/* Index: hys_users_id                                          */
+/*==============================================================*/
+create unique index hys_users_id on hys_users_data (
+   
+);
+
+/*==============================================================*/
+/* Index: hys_datas_id                                          */
+/*==============================================================*/
+create unique index hys_datas_id on hys_users_data (
+   
+);
+
+
+6.数据集表
+
+
+/*==============================================================*/
+/* Table: hys_data                                              */
+/*==============================================================*/
+create table hys_data 
+(
+   hys_storage_id       number(20)           not null,
+   hys_data_nane        varchar2(128),
+   hys_data_pid         varchar2(128),
+   hys_data_level       number(2),
+   constraint PK_HYS_DATA primary key (hys_storage_id)
+)
+/
+
+comment on table hys_data is
+'数据集表'
+/
+
+comment on column hys_data.hys_storage_id is
+'主键id'
+/
+
+comment on column hys_data.hys_data_nane is
+'当前节点名称'
+/
+
+comment on column hys_data.hys_data_pid is
+'当前节点的pid'
+/
+
+comment on column hys_data.hys_data_level is
+'当前节点的等级'
+/
+
+
+create trigger tib_hys_user_data before insert
+on hys_data for each row
+declare
+    integrity_error  exception;
+    errno            integer;
+    errmsg           char(200);
+    dummy            integer;
+    found            boolean;
+
+begin
+    --  Column "hys_storage_id" uses sequence hys_seq_storage_id
+    select hys_seq_storage_id.NEXTVAL INTO :new.hys_storage_id from dual;
+
+--  Errors handling
+exception
+    when integrity_error then
+       raise_application_error(errno, errmsg);
+end;
+/
+
+
+7.设备表
+
+
+/*==============================================================*/
+/* Table: hys_equipment                                         */
+/*==============================================================*/
+create table hys_equipment 
+(
+   hys_storage_id       number(20)           not null,
+   hys_meter_code       varchar2(128),
+   hys_standard_power   number(20),
+   constraint PK_HYS_EQUIPMENT primary key (hys_storage_id)
+)
+/
+
+comment on table hys_equipment is
+'设备表'
+/
+
+comment on column hys_equipment.hys_storage_id is
+'主键id'
+/
+
+comment on column hys_equipment.hys_meter_code is
+'所属设备类型，包括水、电、气'
+/
+
+comment on column hys_equipment.hys_standard_power is
+'设备标准功率'
+/
+
+
+create trigger tib_hys_equipment before insert
+on hys_equipment for each row
+declare
+    integrity_error  exception;
+    errno            integer;
+    errmsg           char(200);
+    dummy            integer;
+    found            boolean;
+
+begin
+    --  Column "hys_storage_id" uses sequence hys_seq_storage_id
+    select hys_seq_storage_id.NEXTVAL INTO :new.hys_storage_id from dual;
+
+--  Errors handling
+exception
+    when integrity_error then
+       raise_application_error(errno, errmsg);
+end;
+/
+
+
+8.设备类型字典表
+
+/*==============================================================*/
+/* Table: hys_meter_type                                        */
+/*==============================================================*/
+create table hys_meter_type 
+(
+   hys_storage_id       number(20)           not null,
+   hys_meter_code       varchar2(128),
+   hys_meter_type       varchar2(128),
+   constraint PK_HYS_METER_TYPE primary key (hys_storage_id)
+)
+/
+
+comment on table hys_meter_type is
+'仪表类型表'
+/
+
+comment on column hys_meter_type.hys_storage_id is
+'仪表类型表主键id'
+/
+
+comment on column hys_meter_type.hys_meter_code is
+'仪表类型，water-水表；heat-热表；gas-气表'
+/
+
+comment on column hys_meter_type.hys_meter_type is
+'具体的仪表类型'
+/
+
+
+create trigger tib_hys_meter_type before insert
+on hys_meter_type for each row
+declare
+    integrity_error  exception;
+    errno            integer;
+    errmsg           char(200);
+    dummy            integer;
+    found            boolean;
+
+begin
+    --  Column "hys_storage_id" uses sequence hys_seq_storage_id
+    select hys_seq_storage_id.NEXTVAL INTO :new.hys_storage_id from dual;
+
+--  Errors handling
+exception
+    when integrity_error then
+       raise_application_error(errno, errmsg);
+end;
+/
+
+
+9.抄表数据表（原始表）
+
+
+/*==============================================================*/
+/* Table: hys_value                                             */
+/*==============================================================*/
+create table hys_value 
+(
+   hys_storage_id       number(20)           not null,
+   hys_meter_id         number(20),
+   hys_org_value        float,
+   hys_norm_value       float,
+   hys_time_stamp       timestamp(6),
+   constraint PK_HYS_VALUE primary key (hys_storage_id)
+)
+/
+
+comment on table hys_value is
+'抄表数据原始表'
+/
+
+comment on column hys_value.hys_storage_id is
+'主键'
+/
+
+comment on column hys_value.hys_meter_id is
+'设备号id'
+/
+
+comment on column hys_value.hys_time_stamp is
+'抄表时间'
+/
+
+create trigger tib_hys_value before insert
+on hys_value for each row
+declare
+    integrity_error  exception;
+    errno            integer;
+    errmsg           char(200);
+    dummy            integer;
+    found            boolean;
+
+begin
+    --  Column "hys_storage_id" uses sequence hys_seq_storage_id
+    select hys_seq_storage_id.NEXTVAL INTO :new.hys_storage_id from dual;
+
+--  Errors handling
+exception
+    when integrity_error then
+       raise_application_error(errno, errmsg);
+end;
+/
+
+
+10.以班次统计的临时表
+
+/*==============================================================*/
+/* Table: hys_value_by_class                                    */
+/*==============================================================*/
+create table hys_value_by_class 
+(
+   hys_meter_id         number(20),
+   hys_begin_time       timestamp(6),
+   hys_end_time         timestamp(6),
+   hys_actual_consumption float,
+   hys_over_consumption float,
+   hys_standard_consumption float,
+   hys_work_time        varchar2(128)
+);
+
+comment on table hys_value_by_class is
+'临时表（处理班次）';
+
+comment on column hys_value_by_class.hys_meter_id is
+'设备号';
+
+comment on column hys_value_by_class.hys_begin_time is
+'抄表开始时间';
+
+comment on column hys_value_by_class.hys_end_time is
+'抄表结束时间';
+
+comment on column hys_value_by_class.hys_actual_consumption is
+'实际消耗';
+
+comment on column hys_value_by_class.hys_over_consumption is
+'超耗';
+
+comment on column hys_value_by_class.hys_standard_consumption is
+'标准功耗';
+
+comment on column hys_value_by_class.hys_work_time is
+'工作时间间隔';
+
+
+
+11.以日为统计的临时表
+
+
+/*==============================================================*/
+/* Table: hys_value_by_day                                      */
+/*==============================================================*/
+create table hys_value_by_day 
+(
+   hys_meter_id         number(20),
+   hys_begin_time       timestamp(6),
+   hys_end_time         timestamp(6),
+   hys_actual_consumption float,
+   hys_over_consumption float,
+   hys_standard_consumption float,
+   hys_work_time        varchar2(128)
+);
+
+comment on table hys_value_by_day is
+'临时表（以日统计）';
+
+comment on column hys_value_by_day.hys_meter_id is
+'设备号';
+
+comment on column hys_value_by_day.hys_begin_time is
+'抄表开始时间';
+
+comment on column hys_value_by_day.hys_end_time is
+'抄表结束时间';
+
+comment on column hys_value_by_day.hys_actual_consumption is
+'实际消耗';
+
+comment on column hys_value_by_day.hys_over_consumption is
+'超耗';
+
+comment on column hys_value_by_day.hys_standard_consumption is
+'标准功耗';
+
+comment on column hys_value_by_day.hys_work_time is
+'工作时间间隔';
+
+
+12.参数表
+
+
+/*==============================================================*/
+/* Table: hys_parameter                                         */
+/*==============================================================*/
+create table hys_parameter 
+(
+   hys_storage_id       number(20)           not null,
+   hys_parameter_code   varchar2(128)        not null,
+   hys_parameter_value  varchar2(128),
+   hys_parameter_type   varchaer2(128)       not null,
+   hys_parameter_remark varchar2(128),
+   constraint PK_HYS_PARAMETER primary key (hys_storage_id)
+)
+/
+
+comment on table hys_parameter is
+'参数表'
+/
+
+comment on column hys_parameter.hys_storage_id is
+'参数主键id'
+/
+
+comment on column hys_parameter.hys_parameter_code is
+'参数编码'
+/
+
+comment on column hys_parameter.hys_parameter_value is
+'参数值'
+/
+
+comment on column hys_parameter.hys_parameter_type is
+'参数类型'
+/
+
+comment on column hys_parameter.hys_parameter_remark is
+'参数备注'
+/
+
+create trigger tib_hys_parameter before insert
+on hys_parameter for each row
+declare
+    integrity_error  exception;
+    errno            integer;
+    errmsg           char(200);
+    dummy            integer;
+    found            boolean;
+
+begin
+    --  Column "hys_storage_id" uses sequence hys_seq_storage_id
+    select hys_seq_storage_id.NEXTVAL INTO :new.hys_storage_id from dual;
+
+--  Errors handling
+exception
+    when integrity_error then
+       raise_application_error(errno, errmsg);
+end;
+/
+
+
+
+
+
+

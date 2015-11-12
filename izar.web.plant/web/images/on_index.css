@@ -1,0 +1,165 @@
+HTML {
+    PADDING-BOTTOM: 0px;
+    MARGIN: 0px;
+    PADDING-LEFT: 0px;
+    PADDING-RIGHT: 0px;
+    BACKGROUND: #000;
+    COLOR: #3f443f;
+    PADDING-TOP: 0px
+}
+
+BODY {
+    PADDING-BOTTOM: 0px;
+    MARGIN: 0px;
+    PADDING-LEFT: 0px;
+    PADDING-RIGHT: 0px;
+    BACKGROUND: #000;
+    COLOR: #3f443f;
+    PADDING-TOP: 0px;
+    BACKGROUND: url(web_bg.jpg) #000 no-repeat 50% 0px;
+    font: snow;
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='web_bg.jpg',sizingMethod='scale'); 
+    background-repeat: no-repeat; 
+    background-positon: 100%, 100%; 
+}
+
+HTML {
+    BACKGROUND: url(web_bg.jpg);
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='web_bg.jpg',sizingMethod='scale'); 
+    background-repeat: no-repeat; 
+    zoom: 1;
+}
+
+IMG {
+    BORDER-BOTTOM: medium none;
+    BORDER-LEFT: medium none;
+    MARGIN: 0px auto;
+    DISPLAY: block;
+    BORDER-TOP: medium none;
+    BORDER-RIGHT: medium none;
+    BORDER-BOTTOM: #444 0px solid;
+    BORDER-LEFT: #444 0px solid;
+    BORDER-TOP: #444 0px solid;
+    BORDER-RIGHT: #444 0px solid;
+}
+
+.cle {
+    CLEAR: both
+}
+
+.on_index {
+    TEXT-ALIGN: center;
+    MARGIN: 0px auto;
+    WIDTH: 960px;
+    MARGIN: 0px auto
+}
+
+.on_indext {
+    TEXT-ALIGN: center;
+    MARGIN: 0px auto;
+    WIDTH: 100%;
+    HEIGHT: 100%;
+    OVERFLOW: hidden
+}
+
+.box {
+    Z-INDEX: 2;
+    POSITION: absolute;
+    MARGIN: 0px auto;
+    WIDTH: 1003px;
+    HEIGHT: 350px;
+    TOP: 32%;
+    color: snow;
+}
+
+.boxbg {
+    Z-INDEX: 1;
+    POSITION: absolute;
+    WIDTH: 1003px;
+    BACKGROUND: url(box_bg.png) no-repeat 50% 0px;
+    HEIGHT: 350px;
+    TOP: 35%
+}
+.box_logo {
+    MARGIN: 0px 8px 0px 0px
+}
+
+.login {
+    MARGIN: 52px auto 0px
+}
+
+.login-body {
+    WIDTH: 420px
+}
+
+.listt {
+    TEXT-ALIGN: right;
+    WIDTH: 180px;
+    FONT: 14px/40px "Microsoft Yahei", Arial, "����", Helvetica, Verdana, Sans-serif
+}
+.list{
+    font-size: 1.1em;
+}
+
+.listdomain {
+    BORDER-BOTTOM: #677065 1px solid;
+    BORDER-LEFT: #677065 1px solid;
+    WIDTH: 87px;
+    FONT: 18px/18px "Microsoft Yahei", Arial, "", Helvetica, Verdana, Sans-serif;
+    FLOAT: right;
+    BORDER-TOP: #677065 1px solid;
+    BORDER-RIGHT: #677065 1px solid
+}
+
+.inputbg {
+    BORDER-BOTTOM: #677065 1px solid;
+    BORDER-LEFT: #677065 1px solid;
+    PADDING-BOTTOM: 0px;
+    PADDING-LEFT: 5px;
+    WIDTH: 158px;
+    PADDING-RIGHT: 0px;
+    FONT: 14px/28px "Microsoft Yahei", Arial, "", Helvetica, Verdana, Sans-serif;
+    BACKGROUND: url(inputbg.gif) repeat-x 0px top;
+    FLOAT: left;
+    HEIGHT: 28px;
+    BORDER-TOP: #677065 1px solid;
+    BORDER-RIGHT: #677065 1px solid;
+    PADDING-TOP: 0px
+}
+
+.inputbg2 {
+    BORDER-BOTTOM: #677065 1px solid;
+    BORDER-LEFT: #677065 1px solid;
+    PADDING-BOTTOM: 0px;
+    LINE-HEIGHT: 28px;
+    PADDING-LEFT: 5px;
+    WIDTH: 250px;
+    PADDING-RIGHT: 0px;
+    BACKGROUND: url(inputbg.gif) #fff repeat-x 0px top;
+    HEIGHT: 28px;
+    BORDER-TOP: #677065 1px solid;
+    BORDER-RIGHT: #677065 1px solid;
+    PADDING-TOP: 0px
+}
+
+.codepic {
+    FLOAT: right
+}
+
+.foot {
+    Z-INDEX: 3;
+    POSITION: relative;
+    WIDTH: 1003px;
+    FONT: 12px/34px Arial, "����", Helvetica, Verdana, Sans-serif;
+    BACKGROUND: url(foot_bg.png) no-repeat 50% 0px;
+    HEIGHT: 584px;
+    COLOR: #fff;
+    TOP: 550px
+}
+/*重新验证部分的样式*/
+.has-error .control-label{
+    color:snow;
+}
+.has-success .control-label{
+    color:snow;
+}
