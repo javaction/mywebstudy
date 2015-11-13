@@ -17,7 +17,8 @@ and open the template in the editor.
             <button type="button" onclick="click1()">我是button跳转</button><br /><br />
             <input type="button" value="点击后，跳转到列表加载的页面.."  /><br/><br />
             <button type="button" onclick="findArrys()">点击，看js数组</button><br/><br />
-            <button type="button" id="btn1">点击，看ajax获取列表数据</button>
+            <button type="button" id="btn1">点击，看ajax获取列表数据</button><br/><br />
+            <button type="button" id="btn2">点击，进入ajax学习页面</button><br/><br />
         </div>
         <hr />
         <div id="d2">
@@ -71,7 +72,9 @@ and open the template in the editor.
                     location.href = getRootPath().projectName+"/suhtml/tabledata1.html";
             });
             
-            
+            $("#btn2").click(function(){
+                window.location.href = getRootPath().projectName+"/suhtml/ajaxtest1.html";
+            });
             
         </script>
         <script type="text/javascript" src="js/suJs/subase.js" ></script>

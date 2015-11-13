@@ -1,0 +1,55 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ajax 学习页面(一)</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script type="text/javascript" src="../js/plug/jquery-min.js"></script>
+        <style type="text/css">
+            #mm{color: #00B83F}
+            #dd1{display: none}
+        </style>
+    </head>
+    <body>
+        <div>ajax 学习页面（一）</div>
+        <div id="d1" title="load()学习">
+            <h4 style="color: skyblue">---$.load()学习----</h4>
+            <!-- 引入 testhtml1.html -->
+            <button type="button" id="btn1">过来吧，页面，通过load()</button>
+            <div id="dd1"></div>
+            <!--// 也可以使用load()传递和回调数据，具体参见网上知识-->
+        </div>
+        <hr />
+        <div id="d2" title="$.get()学习">
+            
+            
+            
+        </div>
+        
+        <script type="text/javascript">
+            
+            $(function(){
+                // load()
+                $("#btn1").click(function(){
+                     $("#dd1").load("/mywebstudy/suhtml/testhtml1.html");
+                    //现在的要求是点击就加载，再点击就去掉 //现在的问题是，第一次进入点击时候，此div是在的，应该默认隐藏,---> ok了；
+                    if($("#dd1").is(":visible")){
+                        $("#dd1").hide();
+                    }else{
+                        $("#dd1").show();
+                    }
+                });
+                
+                
+                
+                
+                
+            });
+            
+        </script>
+        
+    </body>
+</html>

@@ -44,88 +44,126 @@ and open the template in the editor.
             });
             
             // 1.使用传统ajax方式进行提交
-            function loginn(){
-                var username = $("#username").val();
-                var password = $("#password").val();
-                //判断用户名不为空
-                if(username == ""){
-                    $("#uconfirm").text("用户名不能为空！");
-                    $("#username").focus();
-                    return false;
-                }
-                if(password == ""){
-                    $("#pconfirm").text("密码不能为空！");
-                    $("#password").focus();
-                    return false;
-                }
-                
-                $.ajax({
-                    type:'post',
-                    url:'/mywebstudy/webresources/hysuser/login',
-                    contentType:'application/json; charset=utf-8',
-                    data: JSON.stringify({
-                        hysUserName:username,
-                        hysUserPassword:password
-                    }),
-                    datatype:'json',
-                    beforeSend :function(){
-                        alert("指定在请求发送前需要执行的回调函数。ajax学习网址：http://www.365mini.com/page/jquery_ajax.htm");
-                    },
-                    success:function(msg11){
-                        console.log(msg11);
-                        if(msg11.login == "successful"){
-                            $("#uconfirm").text("登陆成功！");
-//                             location.href = "/mystudy/login.html";
-//                             location.href = "/mystudy/dengluhou.html"; //这个用于自测
-                          //   location.href = "/mywebstudy/suhtml/dengluhou.html";
-//                             location.href = "/mystudy/html/login.html";
-//                             window.location.href = getRootPath().projectName+'/suHtml/dengluhou.html?username='+$("#loginFormm input[name=username]").val();
-  
-                                //console.log("----我的路径---:"+getRootPath().projectName);
-//                                location.href = getRootPath().projectName+"/suhtml/login.html";//在suhtml文件夹下的html无法访问，提示404 //相应的库没有导入的问题
-                              //  location.href = getRootPath().projectName+"/html/baseInfo.html";
-                              location.href = getRootPath().projectName+"/dengluhou.html"; 
-
-                             
-                              
-                        }else{  
-                            $("#uconfirm").text("登陆失败！");
-                        }
-                    },
-                    error :function(){
-                        alert("错误，请与管理员联系");
-                    }
-                });
-            }
+//            function loginn(){
+//                var username = $("#username").val();
+//                var password = $("#password").val();
+//                //判断用户名不为空
+//                if(username == ""){
+//                    $("#uconfirm").text("用户名不能为空！");
+//                    $("#username").focus();
+//                    return false;
+//                }
+//                if(password == ""){
+//                    $("#pconfirm").text("密码不能为空！");
+//                    $("#password").focus();
+//                    return false;
+//                }
+//                
+//                $.ajax({
+//                    type:'post',
+//                    url:'/mywebstudy/webresources/hysuser/login',
+//                    contentType:'application/json; charset=utf-8',
+//                    data: JSON.stringify({
+//                        hysUserName:username,
+//                        hysUserPassword:password
+//                    }),
+//                    datatype:'json',
+//                    beforeSend :function(){
+//                       // alert("指定在请求发送前需要执行的回调函数。ajax学习网址：http://www.365mini.com/page/jquery_ajax.htm 这个是成功的，在发送请求前的操作");
+//                    },
+//                    success:function(msg11){
+//                        console.log(msg11);
+//                        if(msg11.login == "successful"){
+//                            $("#uconfirm").text("登陆成功！");
+////                             location.href = "/mystudy/login.html";
+////                             location.href = "/mystudy/dengluhou.html"; //这个用于自测
+//                          //   location.href = "/mywebstudy/suhtml/dengluhou.html";
+////                             location.href = "/mystudy/html/login.html";
+////                             window.location.href = getRootPath().projectName+'/suHtml/dengluhou.html?username='+$("#loginFormm input[name=username]").val();
+//  
+//                                //console.log("----我的路径---:"+getRootPath().projectName);
+////                                location.href = getRootPath().projectName+"/suhtml/login.html";//在suhtml文件夹下的html无法访问，提示404 //相应的库没有导入的问题
+//                              //  location.href = getRootPath().projectName+"/html/baseInfo.html";
+//                              location.href = getRootPath().projectName+"/dengluhou.html"; 
+//
+//                             
+//                              
+//                        }else{  
+//                            $("#uconfirm").text("登陆失败！");
+//                        }
+//                    },
+//                    error :function(){
+//                        alert("错误，请与管理员联系");
+//                    }
+//                });
+//            }
             
-            
-            //2.使用$.post() 作为ajax的应用
-            function loginn1(){
-                var username = $("#username").val();
-                var password = $("#password").val();
-                //判断用户名不为空
-                if(username == ""){
-                    $("#uconfirm").text("用户名不能为空！");
-                    $("#username").focus();
-                    return false;
-                }
-                if(password == ""){
-                    $("#pconfirm").text("密码不能为空！");
-                    $("#password").focus();
-                    return false;
-                }
-                
-                // $.post(url, data, callback, type)
-                //这里需要根据参考资料再测试下。。。
+            /*
+             * 此处以下注释，暂时记录下，下次重新测试$.get()方法
+             */
+//            function loginn1(){
+//                var username = $("#username").val();
+//                var password = $("#password").val();
+//                //判断用户名不为空
+//                if(username == ""){
+//                    $("#uconfirm").text("用户名不能为空！");
+//                    $("#username").focus();
+//                    return false;
+//                }
+//                if(password == ""){
+//                    $("#pconfirm").text("密码不能为空！");
+//                    $("#password").focus();
+//                    return false;
+//                }
+//                
+////                    $.post(url, data, callback, type);
 //                $.post(
-//                "/mywebstudy/webresources/hysuser/login", // URL
-//                {hysUserName:username ,hysUserPassword:password}, //data : 该请求返回的数据
-//                function(data){
-//                    
-//                }, 
-//                type)
-                
-            }
+//                    '/mywebstudy/webresources/hysuser/login',             
+//                    {hysUserName:username,hysUserPassword:password },
+//                , 
+//                , type);
+//                
+//                $.ajax({
+//                    type:'post',
+//                    url:'/mywebstudy/webresources/hysuser/login',
+//                    contentType:'application/json; charset=utf-8',
+//                    data: JSON.stringify({
+//                        hysUserName:username,
+//                        hysUserPassword:password
+//                    }),
+//                    datatype:'json',
+//                    beforeSend :function(){
+//                       // alert("指定在请求发送前需要执行的回调函数。ajax学习网址：http://www.365mini.com/page/jquery_ajax.htm 这个是成功的，在发送请求前的操作");
+//                    },
+//                    success:function(msg11){
+//                        console.log(msg11);
+//                        if(msg11.login == "successful"){
+//                            $("#uconfirm").text("登陆成功！");
+////                             location.href = "/mystudy/login.html";
+////                             location.href = "/mystudy/dengluhou.html"; //这个用于自测
+//                          //   location.href = "/mywebstudy/suhtml/dengluhou.html";
+////                             location.href = "/mystudy/html/login.html";
+////                             window.location.href = getRootPath().projectName+'/suHtml/dengluhou.html?username='+$("#loginFormm input[name=username]").val();
+//  
+//                                //console.log("----我的路径---:"+getRootPath().projectName);
+////                                location.href = getRootPath().projectName+"/suhtml/login.html";//在suhtml文件夹下的html无法访问，提示404 //相应的库没有导入的问题
+//                              //  location.href = getRootPath().projectName+"/html/baseInfo.html";
+//                              location.href = getRootPath().projectName+"/dengluhou.html"; 
+//
+//                             
+//                              
+//                        }else{  
+//                            $("#uconfirm").text("登陆失败！");
+//                        }
+//                    },
+//                    error :function(){
+//                        alert("错误，请与管理员联系");
+//                    }
+//                });
+//            }
+            
+            
+            
             
         </script>
         
